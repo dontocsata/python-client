@@ -41,7 +41,16 @@ class RemoteCache(object):
 
   def stop(self):
     self.s.close()
-
+  
+  def __getitem__(self, key):
+    return self.get(key)
+  
+  def __setitem__(self, key, value):
+    return self.put(key, value)
+    
+  def __delitem__(self, key):
+    return self.remove(key)
+  
   def put(self, key, val, lifespan=0, max_idle=0, ret_prev=False):
     """ Associates the specified value with the specified key in the
     remote cache.
